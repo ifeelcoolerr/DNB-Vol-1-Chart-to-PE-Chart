@@ -81,8 +81,7 @@ for section in chart_data["notes"]:
 
     psych_chart["song"]["notes"].append(new_section)
 
-# Rename put-song-name-here to the song from the json file!
-with open("put-song-name-here.json", "w") as f:
+with open(f"{songNameLol}.json", "w") as f:
     json.dump(psych_chart, f, indent=4)
 
 print("Successfully converted " + psych_chart["song"]["song"] + " to Psych Engine Format!")
