@@ -1,10 +1,23 @@
 import json
+import os
 
-songNameLol = input('Enter song name: ')
+songNameLol = input('Enter song name: ').strip()
 
-with open(f"{songNameLol}-chart.json", "r") as f:
+if not songNameLol:
+    raise ValueError("Error: You forgot to enter a song name.")
+
+chart_file = f"{songNameLol}-chart.json"
+meta_file = f"{songNameLol}-metadata.json"
+
+if not os.path.isfile(chart_file):
+    raise FileNotFoundError(f"Error: Volume 1 Chart file '{chart_file}' not found. Does it exist in your folder?")
+
+if not os.path.isfile(meta_file):
+    raise FileNotFoundError(f"Error: Volume 1 Metadata file '{meta_file}' not found. Does it exist in your folder?")
+
+with open(chart_file, "r") as f:
     chart_data = json.load(f)
-with open(f"{songNameLol}-metadata.json", "r") as f:
+with open(meta_file, "r") as f:
     meta_data = json.load(f)
 
 psych_chart = {
