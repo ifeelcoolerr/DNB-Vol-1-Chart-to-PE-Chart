@@ -62,10 +62,19 @@ for section in chart_data["notes"]:
     }
 
     for note in section["notes"]:
+        note_time = note["time"]
+        note_bpm = get_bpm_for_time(note_time)
+
+        ms_per_step = (60000 / note_bpm) / 4
+
+        raw_length = note.get("length", 0)
+
+        converted_length = round(raw_length * ms_per_step, 3)
+
         new_note = [
-            note["time"],
+            note_time,
             note["direction"],
-            note.get("length", 0),
+            converted_length,
             note.get("style", note.get("type", ""))
         ]
         new_section["sectionNotes"].append(new_note)
